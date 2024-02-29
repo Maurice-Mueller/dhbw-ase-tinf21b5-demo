@@ -5,15 +5,37 @@ Das ist das Demo-Projekt für ASE.
 
 ## Übersicht der Eigenschaften
 
-* Artikel erstellen
-* Artikel löschen
-* Artikel suchen
-* Artikelübersicht
+* WikiEntry erstellen
+* WikiEntry löschen
+* WikiEntry suchen
+* WikiEntry-Übersicht
 * Versionsverwaltung
-* Artikel
+* WikiEntry
   * Inhalt
   * Metadaten
     * Verlinkung
     * Author
     * Erstellungsdatum
     * Aktualisierungsdatum
+
+
+## Technische Umsetzung
+
+* WikiEntryRepository
+* WikiEntry
+    * Inhalt
+    * Metadaten
+        * Verlinkung
+        * Author
+        * Erstellungsdatum
+        * Aktualisierungsdatum
+* offene Punkte
+  * Wo führen wir CRUD-Operationen durch?
+    * WikiEntry
+    * UseCases
+    * Repository
+
+
+## Ubiquitous Language
+
+* WikiEntry: Ein Eintrag im Wiki
