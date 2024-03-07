@@ -3,7 +3,7 @@ package de.dhbw.wikientry;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record WikiEntryRecord(
+public record WikiEntry(
         long id,
 
         String content,
@@ -12,19 +12,19 @@ public record WikiEntryRecord(
         LocalDateTime created,
         LocalDateTime lastUpdated,
 
-        List<WikiEntryRecord> links
+        List<WikiEntry> links
 ) {
 
-    public WikiEntryRecord(String content, String author) {
+    public WikiEntry(String content, String author) {
         this(WikiEntryRepository.getNextId(), content, author, LocalDateTime.now(), null, List.of());
     }
 
-    public WikiEntryRecord() {
+    public WikiEntry() {
         this(WikiEntryRepository.getNextId(), "Test", "Maurice", LocalDateTime.now(), null, List.of());
     }
 
-    public WikiEntryRecord copyWithLastUpdated(LocalDateTime lastUpdated) {
-        return new WikiEntryRecord(
+    public WikiEntry copyWithLastUpdated(LocalDateTime lastUpdated) {
+        return new WikiEntry(
                 this.id(),
                 this.content(),
                 this.author(),

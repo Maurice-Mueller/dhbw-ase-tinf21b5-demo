@@ -10,25 +10,25 @@ public class WikiEntryRepository {
 
     private final static AtomicLong ID_COUNTER = new AtomicLong();
 
-    private final Map<Long, WikiEntryRecord> entries = new HashMap<>();
+    private final Map<Long, WikiEntry> entries = new HashMap<>();
 
     public static long getNextId() {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public WikiEntryRecord getWikiEntryRecord(long id) {
+    public WikiEntry getWikiEntry(long id) {
         return entries.get(id);
     }
 
-    public void saveWikiEntryRecord(WikiEntryRecord wikiEntryRecord) {
-        if (entries.containsKey(wikiEntryRecord.id())) {
-            entries.put(wikiEntryRecord.id(), wikiEntryRecord.copyWithLastUpdated(LocalDateTime.now()));
+    public void saveWikiEntry(WikiEntry wikiEntry) {
+        if (entries.containsKey(wikiEntry.id())) {
+            entries.put(wikiEntry.id(), wikiEntry.copyWithLastUpdated(LocalDateTime.now()));
             return;
         }
-        entries.put(wikiEntryRecord.id(), wikiEntryRecord);
+        entries.put(wikiEntry.id(), wikiEntry);
     }
 
-    public Collection<WikiEntryRecord> getAll() {
+    public Collection<WikiEntry> getAll() {
         return entries.values();
     }
 
