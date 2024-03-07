@@ -29,7 +29,7 @@ public record WikiEntry(
                 this.content(),
                 this.author(),
                 this.created(),
-                LocalDateTime.now(),
+                lastUpdated,
                 this.links());
     }
 }
