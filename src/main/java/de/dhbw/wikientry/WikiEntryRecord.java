@@ -4,8 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record WikiEntryRecord(
-        String content,
+        long id,
 
+        String content,
         // meta data
         String author,
         LocalDateTime created,
@@ -15,10 +16,20 @@ public record WikiEntryRecord(
 ) {
 
     public WikiEntryRecord(String content, String author) {
-        this(content, author, LocalDateTime.now(), null, List.of());
+        this(WikiEntryRepository.getNextId(), content, author, LocalDateTime.now(), null, List.of());
     }
 
     public WikiEntryRecord() {
-        this("Test", "Maurice", LocalDateTime.now(), null, List.of());
+        this(WikiEntryRepository.getNextId(), "Test", "Maurice", LocalDateTime.now(), null, List.of());
+    }
+
+    public WikiEntryRecord copyWithLastUpdated(LocalDateTime lastUpdated) {
+        return new WikiEntryRecord(
+                this.id(),
+                this.content(),
+                this.author(),
+                this.created(),
+                LocalDateTime.now(),
+                this.links());
     }
 }
