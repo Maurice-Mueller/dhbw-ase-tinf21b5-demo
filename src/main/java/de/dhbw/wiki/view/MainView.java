@@ -6,11 +6,16 @@ import java.util.Scanner;
 
 public class MainView implements View {
 
+    private final WikiEntryRepository wikiEntryRepository;
+
+    public MainView(WikiEntryRepository wikiEntryRepository) {
+        this.wikiEntryRepository = wikiEntryRepository;
+    }
+
     public void show() {
         System.out.println("Hello in our application");
         System.out.println();
 
-        WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
 
         while (true) {
             String menuInput = getMainMenuInput();

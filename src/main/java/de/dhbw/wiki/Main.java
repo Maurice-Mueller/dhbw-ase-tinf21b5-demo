@@ -5,6 +5,7 @@ import de.dhbw.wiki.view.MainView;
 public class Main {
 
     public static void main(String[] args) {
-        new MainView().show();
+        WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
+        new MainView(wikiEntryRepository).show();
     }
 }
