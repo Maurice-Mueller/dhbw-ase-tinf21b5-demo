@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
-        CreateWikiEntryService wikiEntryService = new CreateWikiEntryService(wikiEntryRepository);
-        new MainView(wikiEntryRepository, wikiEntryService).show();
+        WikiEntryService wikiEntryService = new WikiEntryService(wikiEntryRepository);
+        new MainView(wikiEntryService).show();
     }
 }

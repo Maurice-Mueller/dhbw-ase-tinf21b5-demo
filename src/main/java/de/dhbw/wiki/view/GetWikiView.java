@@ -1,16 +1,16 @@
 package de.dhbw.wiki.view;
 
+import de.dhbw.wiki.WikiEntryService;
 import de.dhbw.wiki.WikiEntry;
-import de.dhbw.wiki.WikiEntryRepository;
 
 import java.util.Scanner;
 
 public class GetWikiView implements View {
 
-    private final WikiEntryRepository wikiEntryRepository;
+    private final WikiEntryService wikiEntryService;
 
-    public GetWikiView(WikiEntryRepository wikiEntryRepository) {
-        this.wikiEntryRepository = wikiEntryRepository;
+    public GetWikiView(WikiEntryService wikiEntryService) {
+        this.wikiEntryService = wikiEntryService;
     }
 
 
@@ -21,7 +21,7 @@ public class GetWikiView implements View {
         String entryIdString = new Scanner(System.in).nextLine();
         try {
             long entryId = Long.parseLong(entryIdString);
-            WikiEntry wikiEntry = wikiEntryRepository.getWikiEntry(entryId);
+            WikiEntry wikiEntry = wikiEntryService.getWikiEntry(entryId);
             if(wikiEntry == null) {
                 System.out.println("Entry does not exist.");
                 return;

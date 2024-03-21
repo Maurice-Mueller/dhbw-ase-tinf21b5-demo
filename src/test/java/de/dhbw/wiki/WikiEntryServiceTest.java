@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CreateWikiEntryServiceTest {
+class WikiEntryServiceTest {
 
     @Test
     void testCreateEntry() {
         WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
-        CreateWikiEntryService wikiEntryService = new CreateWikiEntryService(wikiEntryRepository);
+        WikiEntryService wikiEntryService = new WikiEntryService(wikiEntryRepository);
         wikiEntryService.saveWikiEntry("Hello", "world");
 
         assertThat(wikiEntryRepository.getAll())

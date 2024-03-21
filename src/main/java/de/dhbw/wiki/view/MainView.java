@@ -1,17 +1,14 @@
 package de.dhbw.wiki.view;
 
-import de.dhbw.wiki.CreateWikiEntryService;
-import de.dhbw.wiki.WikiEntryRepository;
+import de.dhbw.wiki.WikiEntryService;
 
 import java.util.Scanner;
 
 public class MainView implements View {
 
-    private final WikiEntryRepository wikiEntryRepository;
-    private final CreateWikiEntryService wikiEntryService;
+    private final WikiEntryService wikiEntryService;
 
-    public MainView(WikiEntryRepository wikiEntryRepository, CreateWikiEntryService wikiEntryService) {
-        this.wikiEntryRepository = wikiEntryRepository;
+    public MainView(WikiEntryService wikiEntryService) {
         this.wikiEntryService = wikiEntryService;
     }
 
@@ -24,7 +21,7 @@ public class MainView implements View {
             String menuInput = getMainMenuInput();
 
             if (menuInput.equals("1")) {
-                new GetWikiView(wikiEntryRepository).show();
+                new GetWikiView(wikiEntryService).show();
             } else if (menuInput.equals("2")) {
                 new CreateWikiView(wikiEntryService).show();
             } else if (menuInput.equals("0")) {
