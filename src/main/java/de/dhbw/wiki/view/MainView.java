@@ -1,5 +1,6 @@
 package de.dhbw.wiki.view;
 
+import de.dhbw.wiki.CreateWikiEntryService;
 import de.dhbw.wiki.WikiEntryRepository;
 
 import java.util.Scanner;
@@ -7,9 +8,11 @@ import java.util.Scanner;
 public class MainView implements View {
 
     private final WikiEntryRepository wikiEntryRepository;
+    private final CreateWikiEntryService wikiEntryService;
 
-    public MainView(WikiEntryRepository wikiEntryRepository) {
+    public MainView(WikiEntryRepository wikiEntryRepository, CreateWikiEntryService wikiEntryService) {
         this.wikiEntryRepository = wikiEntryRepository;
+        this.wikiEntryService = wikiEntryService;
     }
 
     public void show() {
@@ -23,7 +26,7 @@ public class MainView implements View {
             if (menuInput.equals("1")) {
                 new GetWikiView(wikiEntryRepository).show();
             } else if (menuInput.equals("2")) {
-                new CreateWikiView(wikiEntryRepository).show();
+                new CreateWikiView(wikiEntryService).show();
             } else if (menuInput.equals("0")) {
                 System.out.println("Good bye.");
                 break;

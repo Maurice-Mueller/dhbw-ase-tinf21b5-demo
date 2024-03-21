@@ -1,16 +1,15 @@
 package de.dhbw.wiki.view;
 
-import de.dhbw.wiki.WikiEntry;
-import de.dhbw.wiki.WikiEntryRepository;
+import de.dhbw.wiki.CreateWikiEntryService;
 
 import java.util.Scanner;
 
 public class CreateWikiView implements View {
 
-    private final WikiEntryRepository wikiEntryRepository;
+    private final CreateWikiEntryService createWikiEntryService;
 
-    public CreateWikiView(WikiEntryRepository wikiEntryRepository) {
-        this.wikiEntryRepository = wikiEntryRepository;
+    public CreateWikiView(CreateWikiEntryService createWikiEntryService) {
+        this.createWikiEntryService = createWikiEntryService;
     }
 
     @Override
@@ -20,7 +19,7 @@ public class CreateWikiView implements View {
         String content = new Scanner(System.in).nextLine();
         System.out.println("Enter author:");
         String author = new Scanner(System.in).nextLine();
-        WikiEntry entry = new WikiEntry(content, author);
-        wikiEntryRepository.saveWikiEntry(entry);
+        createWikiEntryService.saveWikiEntry(content, author);
     }
+
 }
