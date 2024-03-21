@@ -1,4 +1,4 @@
-package de.dhbw.wikientry;
+package de.dhbw.wiki;
 
 import java.util.Scanner;
 
