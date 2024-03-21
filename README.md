@@ -29,11 +29,8 @@ Das ist das Demo-Projekt für ASE.
         * Author
         * Erstellungsdatum
         * Aktualisierungsdatum
-* offene Punkte
-  * Wo führen wir CRUD-Operationen durch?
-    * WikiEntry
-    * UseCases
-    * Repository
+* DB?
+* CI/CD
 
 
 ## Ubiquitous Language
