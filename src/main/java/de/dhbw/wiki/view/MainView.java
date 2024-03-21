@@ -1,6 +1,5 @@
 package de.dhbw.wiki.view;
 
-import de.dhbw.wiki.WikiEntry;
 import de.dhbw.wiki.WikiEntryRepository;
 
 import java.util.Scanner;
