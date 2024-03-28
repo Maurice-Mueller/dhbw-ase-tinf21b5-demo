@@ -21,9 +21,9 @@ public class MainView implements View {
             String menuInput = getMainMenuInput();
 
             if (menuInput.equals("1")) {
-                new GetWikiView(wikiEntryService).show();
+                new ShowWikiEntryView(wikiEntryService).show();
             } else if (menuInput.equals("2")) {
-                new CreateWikiView(wikiEntryService).show();
+                new CreateWikiEntryView(wikiEntryService).show();
             } else if (menuInput.equals("0")) {
                 System.out.println("Good bye.");
                 break;

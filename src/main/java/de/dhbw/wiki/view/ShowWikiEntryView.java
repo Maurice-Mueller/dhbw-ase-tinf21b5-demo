@@ -5,11 +5,11 @@ import de.dhbw.wiki.WikiEntry;
 
 import java.util.Scanner;
 
-public class GetWikiView implements View {
+public class ShowWikiEntryView implements View {
 
     private final WikiEntryService wikiEntryService;
 
-    public GetWikiView(WikiEntryService wikiEntryService) {
+    public ShowWikiEntryView(WikiEntryService wikiEntryService) {
         this.wikiEntryService = wikiEntryService;
     }
 
