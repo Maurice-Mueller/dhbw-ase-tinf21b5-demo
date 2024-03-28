@@ -29,8 +29,11 @@ Das ist das Demo-Projekt für ASE.
         * Author
         * Erstellungsdatum
         * Aktualisierungsdatum
-* DB?
+
+## TODOs
 * CI/CD
+* MongoDB Connection debuggen
+* SLF4J für MongoDB Logs
 
 
 ## Ubiquitous Language
