@@ -15,5 +15,26 @@ jobs:
           distribution: 'temurin'
       - name: build with maven
         run: mvn package
-      - name: run tests
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-artifact
+          path: target/*.jar
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: built-artifact
+          path: target
+      - name: Run tests
         run: mvn verify
