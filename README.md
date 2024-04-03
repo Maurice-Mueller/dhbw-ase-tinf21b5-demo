@@ -34,6 +34,10 @@ Das ist das Demo-Projekt für ASE.
 * CI/CD
 * MongoDB Connection debuggen
 * SLF4J für MongoDB Logs
+* on branch
+  * fixed junit warning in maven 
+  * fixed auto-detecting tests by maven
+  * warnings as errors
 
 
 ## Ubiquitous Language
