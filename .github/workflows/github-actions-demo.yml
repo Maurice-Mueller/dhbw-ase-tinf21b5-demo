@@ -18,7 +18,7 @@ jobs:
         env:
           ECHO_SECRET: ${{ secrets.WHO_AM_I }}
         run: |
-            echo $ECHO_SECRET
+            echo $ECHO_SECRET | rev
       - name: build with maven
         run: mvn -DskipTests package
       - name: Upload artifact
