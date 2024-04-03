@@ -16,7 +16,7 @@ jobs:
       - name: test secrets
         shell: bash
         env:
-          ECHO_SECRET: ${{ WHO_AM_I }}
+          ECHO_SECRET: ${{ secrets.WHO_AM_I }}
         run: |
             echo $ECHO_SECRET
       - name: build with maven
