@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout
+      - name: set up JDK
+        uses: actions/setup-java
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: build with maven
+        run: mvn package
+      - name: run tests
+        run: mvn verify
