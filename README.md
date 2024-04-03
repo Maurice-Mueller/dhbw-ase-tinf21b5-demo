@@ -38,6 +38,10 @@ Das ist das Demo-Projekt für ASE.
   * fixed junit warning in maven 
   * fixed auto-detecting tests by maven
   * warnings as errors
+  * publish to dockerhub
+    * https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-docker-hub
+  * using secrets
+    * https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 
 
 ## Ubiquitous Language
