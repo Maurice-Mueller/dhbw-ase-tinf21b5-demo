@@ -13,6 +13,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+      - name: test secrets
+        shell: bash
+        env:
+          ECHO_SECRET: ${{ WHO_AM_I }}
+        run: |
+            echo $ECHO_SECRET
       - name: build with maven
         run: mvn -DskipTests package
       - name: Upload artifact
