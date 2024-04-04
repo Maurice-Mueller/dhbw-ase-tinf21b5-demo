@@ -37,24 +37,49 @@ public class MongoDBConnector {
         getWikiEntryCollection(collection -> collection.insertOne(document));
     }
 
+    public List<WikiEntry> getAllWikiEntry() {
+        final List<WikiEntry> list = new ArrayList<>();
+
+        getWikiEntryCollection(collection -> {
+            collection.find().forEach(document -> {
+                list.add(
+                        new WikiEntry(
+                                document.getLong("id"),
+                                document.getString("content"),
+                                document.getString("author"),
+                                LocalDateTime.now(), // TODO
+                                LocalDateTime.now(), // TODO
+                                List.of()
+                        ));
+            });
+        });
+
+        return list;
+    }
+
+    public void deleteAllWikiEntries() {
+        getWikiEntryCollection(collection -> collection.deleteMany(new Document()));
+    }
+
     public WikiEntry getWikiEntry(long id) {
         final List<WikiEntry> list = new ArrayList<>();
 
         getWikiEntryCollection(collection -> {
             Document document = collection.find(eq("id", id)).first();
 
-            list.add(new WikiEntry(
-                    document.getLong("id"),
-                    document.getString("content"),
-                    document.getString("author"),
-                    LocalDateTime.now(), // TODO
-                    LocalDateTime.now(), // TODO
-                    List.of()
-            ));
+            list.add(
+                    new WikiEntry(
+                            document.getLong("id"),
+                            document.getString("content"),
+                            document.getString("author"),
+                            LocalDateTime.now(), // TODO
+                            LocalDateTime.now(), // TODO
+                            List.of()
+                    ));
 
         });
 
-        if(list.isEmpty()) {
+        if (list.isEmpty()) {
             return null;
         }
         return list.getFirst();

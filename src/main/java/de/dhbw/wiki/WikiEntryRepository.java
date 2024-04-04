@@ -3,7 +3,6 @@ package de.dhbw.wiki;
 import de.dhbw.wiki.db.MongoDBConnector;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class WikiEntryRepository {
@@ -25,7 +24,11 @@ public class WikiEntryRepository {
     }
 
     public Collection<WikiEntry> getAll() {
-        return List.of(); // TODO
+        return mongoDBConnector.getAllWikiEntry();
+    }
+
+    public void deleteAll() {
+        mongoDBConnector.deleteAllWikiEntries();
     }
 
 }
