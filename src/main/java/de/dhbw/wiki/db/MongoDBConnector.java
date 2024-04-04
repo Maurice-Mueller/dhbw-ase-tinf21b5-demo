@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -20,11 +20,11 @@ public class MongoDBConnector {
     private final String uri = "mongodb://demo:helloworld@localhost:27017/";
 
 
-    private void getWikiEntryCollection(Consumer<MongoCollection<Document>> consumer) {
+    private <T> T getWikiEntryCollection(Function<MongoCollection<Document>, T> function) {
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase("wiki");
             MongoCollection<Document> collection = database.getCollection("wiki_entry");
-            consumer.accept(collection);
+            return function.apply(collection);
         }
     }
 
@@ -41,26 +41,23 @@ public class MongoDBConnector {
     }
 
     public List<WikiEntry> getAllWikiEntry() {
-        final List<WikiEntry> list = new ArrayList<>();
-
-        getWikiEntryCollection(collection -> {
-            collection.find().forEach(document -> {
-                list.add(transformToWikiEntry(document));
-            });
-        });
-
-        return list;
+        return getWikiEntryCollection(collection -> {
+                    List<WikiEntry> result = new ArrayList<>();
+                    collection.find().map(this::transformToWikiEntry).into(result);
+                    return result;
+                }
+        );
     }
 
     private WikiEntry transformToWikiEntry(Document document) {
         return new WikiEntry(
-                        UUID.fromString(document.getString("id")),
-                        document.getString("content"),
-                        document.getString("author"),
-                        LocalDateTime.now(), // TODO
-                        LocalDateTime.now(), // TODO
-                        List.of()
-                );
+                UUID.fromString(document.getString("id")),
+                document.getString("content"),
+                document.getString("author"),
+                LocalDateTime.now(), // TODO
+                LocalDateTime.now(), // TODO
+                List.of()
+        );
     }
 
     public void deleteAllWikiEntries() {
@@ -68,19 +65,9 @@ public class MongoDBConnector {
     }
 
     public WikiEntry getWikiEntry(UUID id) {
-        final List<WikiEntry> list = new ArrayList<>();
-
-        getWikiEntryCollection(collection -> {
-            Document document = collection.find(eq("id", id.toString())).first();
-
-            list.add(transformToWikiEntry(document));
-
-        });
-
-        if (list.isEmpty()) {
-            return null;
-        }
-        return list.getFirst();
+        return getWikiEntryCollection(collection ->
+            collection.find(eq("id", id.toString())).map(this::transformToWikiEntry).first()
+        );
     }
 
 }
