@@ -8,7 +8,7 @@ public class WikiEntryServiceTest {
 
     @Test
     public void testCreateEntry() {
-        WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
+        WikiEntryRepository wikiEntryRepository = new WikiEntryMongoDBRepository();
         wikiEntryRepository.deleteAll();
         WikiEntryService wikiEntryService = new WikiEntryService(wikiEntryRepository);
         wikiEntryService.saveWikiEntry("Hello", "world");

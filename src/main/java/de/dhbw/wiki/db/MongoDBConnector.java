@@ -10,6 +10,7 @@ import org.bson.Document;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -28,13 +29,15 @@ public class MongoDBConnector {
     }
 
     public void saveWikiEntry(WikiEntry wikiEntry) {
-        Document document = new Document();
+        getWikiEntryCollection(collection -> collection.insertOne(wikiEntryToDocument(wikiEntry)));
+    }
 
-        document.put("id", wikiEntry.id());
+    private Document wikiEntryToDocument(WikiEntry wikiEntry) {
+        Document document = new Document();
+        document.put("id", wikiEntry.id().toString());
         document.put("content", wikiEntry.content());
         document.put("author", wikiEntry.author());
-
-        getWikiEntryCollection(collection -> collection.insertOne(document));
+        return document;
     }
 
     public List<WikiEntry> getAllWikiEntry() {
@@ -42,40 +45,35 @@ public class MongoDBConnector {
 
         getWikiEntryCollection(collection -> {
             collection.find().forEach(document -> {
-                list.add(
-                        new WikiEntry(
-                                document.getLong("id"),
-                                document.getString("content"),
-                                document.getString("author"),
-                                LocalDateTime.now(), // TODO
-                                LocalDateTime.now(), // TODO
-                                List.of()
-                        ));
+                list.add(transformToWikiEntry(document));
             });
         });
 
         return list;
     }
 
+    private WikiEntry transformToWikiEntry(Document document) {
+        return new WikiEntry(
+                        UUID.fromString(document.getString("id")),
+                        document.getString("content"),
+                        document.getString("author"),
+                        LocalDateTime.now(), // TODO
+                        LocalDateTime.now(), // TODO
+                        List.of()
+                );
+    }
+
     public void deleteAllWikiEntries() {
         getWikiEntryCollection(collection -> collection.deleteMany(new Document()));
     }
 
-    public WikiEntry getWikiEntry(long id) {
+    public WikiEntry getWikiEntry(UUID id) {
         final List<WikiEntry> list = new ArrayList<>();
 
         getWikiEntryCollection(collection -> {
-            Document document = collection.find(eq("id", id)).first();
+            Document document = collection.find(eq("id", id.toString())).first();
 
-            list.add(
-                    new WikiEntry(
-                            document.getLong("id"),
-                            document.getString("content"),
-                            document.getString("author"),
-                            LocalDateTime.now(), // TODO
-                            LocalDateTime.now(), // TODO
-                            List.of()
-                    ));
+            list.add(transformToWikiEntry(document));
 
         });
 

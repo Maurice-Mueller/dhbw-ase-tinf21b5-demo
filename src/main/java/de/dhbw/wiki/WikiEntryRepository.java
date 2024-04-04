@@ -1,34 +1,16 @@
 package de.dhbw.wiki;
 
-import de.dhbw.wiki.db.MongoDBConnector;
-
 import java.util.Collection;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 
-public class WikiEntryRepository {
-
-    private final static AtomicLong ID_COUNTER = new AtomicLong();
+public interface WikiEntryRepository {
 
 
-    private final MongoDBConnector mongoDBConnector = new MongoDBConnector();
+    WikiEntry getWikiEntry(UUID id);
 
-    public static long getNextId() {
-        return ID_COUNTER.incrementAndGet();
-    }
-    public WikiEntry getWikiEntry(long id) {
-        return mongoDBConnector.getWikiEntry(id);
-    }
+    void saveWikiEntry(WikiEntry wikiEntry);
 
-    public void saveWikiEntry(WikiEntry wikiEntry) {
-        mongoDBConnector.saveWikiEntry(wikiEntry);
-    }
+    Collection<WikiEntry> getAll();
 
-    public Collection<WikiEntry> getAll() {
-        return mongoDBConnector.getAllWikiEntry();
-    }
-
-    public void deleteAll() {
-        mongoDBConnector.deleteAllWikiEntries();
-    }
-
+    void deleteAll();
 }

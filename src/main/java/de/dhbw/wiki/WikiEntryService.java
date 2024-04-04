@@ -1,5 +1,7 @@
 package de.dhbw.wiki;
 
+import java.util.UUID;
+
 public class WikiEntryService {
 
 
@@ -15,7 +17,7 @@ public class WikiEntryService {
     }
 
 
-    public WikiEntry getWikiEntry(long entryId) {
+    public WikiEntry getWikiEntry(UUID entryId) {
         return wikiEntryRepository.getWikiEntry(entryId);
     }
 

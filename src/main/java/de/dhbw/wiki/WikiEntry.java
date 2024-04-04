@@ -2,9 +2,10 @@ package de.dhbw.wiki;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public record WikiEntry(
-        long id,
+        UUID id,
 
         String content,
         // meta data
@@ -16,11 +17,11 @@ public record WikiEntry(
 ) {
 
     public WikiEntry(String content, String author) {
-        this(WikiEntryRepository.getNextId(), content, author, LocalDateTime.now(), null, List.of());
+        this(UUID.randomUUID(), content, author, LocalDateTime.now(), null, List.of());
     }
 
     public WikiEntry() {
-        this(WikiEntryRepository.getNextId(), "Test", "Maurice", LocalDateTime.now(), null, List.of());
+        this(UUID.randomUUID(), "Test", "Maurice", LocalDateTime.now(), null, List.of());
     }
 
     public WikiEntry copyWithLastUpdated(LocalDateTime lastUpdated) {

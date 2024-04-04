@@ -1,9 +1,10 @@
 package de.dhbw.wiki.view;
 
-import de.dhbw.wiki.WikiEntryService;
 import de.dhbw.wiki.WikiEntry;
+import de.dhbw.wiki.WikiEntryService;
 
 import java.util.Scanner;
+import java.util.UUID;
 
 public class ShowWikiEntryView implements View {
 
@@ -20,7 +21,7 @@ public class ShowWikiEntryView implements View {
         System.out.println("What entry do you want?");
         String entryIdString = new Scanner(System.in).nextLine();
         try {
-            long entryId = Long.parseLong(entryIdString);
+            UUID entryId = UUID.fromString(entryIdString);
             WikiEntry wikiEntry = wikiEntryService.getWikiEntry(entryId);
             if(wikiEntry == null) {
                 System.out.println("Entry does not exist.");

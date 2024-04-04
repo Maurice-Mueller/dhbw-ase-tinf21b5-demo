@@ -9,7 +9,7 @@ public class WikiEntryRepositoryTest {
     @Test
     public void testAddNewEntry() {
         // arrange
-        WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
+        WikiEntryRepository wikiEntryRepository = new WikiEntryMongoDBRepository();
         WikiEntry wikiEntry = new WikiEntry();
 
         // act
@@ -23,7 +23,7 @@ public class WikiEntryRepositoryTest {
     public void testUpdateLastUpdated() {
         // arrange
         WikiEntry wikiEntry = new WikiEntry();
-        WikiEntryRepository wikiEntryRepository = new WikiEntryRepository();
+        WikiEntryRepository wikiEntryRepository = new WikiEntryMongoDBRepository();
         wikiEntryRepository.saveWikiEntry(wikiEntry);
 
         // act
