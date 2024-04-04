@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WikiEntryRepositoryTest {
+public class WikiEntryRepositoryIT {
 
     @Test
     public void testAddNewEntry() {
